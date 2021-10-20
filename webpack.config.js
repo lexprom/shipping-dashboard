@@ -1,10 +1,10 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-require('dotenv').config()
+const { DefinePlugin } = require("webpack");
+const dotenv = require("dotenv");
 
 const env = process.env.NODE_ENV;
 const isProduction = env === "production";
-
 
 module.exports = {
   mode: isProduction ? "production" : "development",
@@ -14,6 +14,9 @@ module.exports = {
       template: "public/index.html",
       filename: "index.html",
       inject: true,
+    }),
+    new DefinePlugin({
+      "process.env": JSON.stringify(dotenv.config().parsed), // it will automatically pick up key values from .env file
     }),
   ],
   module: {
