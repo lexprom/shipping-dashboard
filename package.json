@@ -1,0 +1,67 @@
+{
+  "name": "shipping-dashboard",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "repository": "git@github.com:lexprom/shipping-dashboard.git",
+  "author": "lexprom <lexprom009@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "yarn webpack-dev-server --node-env=development",
+    "build": "webpack --node-env=production",
+    "test": "",
+    "pre-commit": "tsc && lint-staged"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.6.2",
+    "d3": "^7.1.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-redux": "^7.2.5"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.15.7",
+    "@babel/preset-env": "^7.15.8",
+    "@babel/preset-react": "^7.14.5",
+    "@babel/preset-typescript": "^7.15.0",
+    "@types/d3": "^7.0.0",
+    "@types/html-webpack-plugin": "^3.2.6",
+    "@types/jest": "^27.0.2",
+    "@types/react": "^17.0.30",
+    "@types/react-dom": "^17.0.9",
+    "@types/react-redux": "^7.1.19",
+    "@typescript-eslint/eslint-plugin": "^5.1.0",
+    "@typescript-eslint/parser": "^5.1.0",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^6.4.0",
+    "dotenv": "^10.0.0",
+    "eslint": "^8.0.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-react-app": "^6.0.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-import-resolver-babel-module": "^5.3.1",
+    "eslint-import-resolver-typescript": "^2.5.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.26.1",
+    "eslint-plugin-standard": "^5.0.0",
+    "html-webpack-plugin": "^5.4.0",
+    "husky": "^7.0.0",
+    "jest": "^27.3.1",
+    "lint-staged": "^11.2.3",
+    "prettier": "^2.4.1",
+    "typescript": "^4.4.4",
+    "webpack": "^5.58.2",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.3.1"
+  },
+  "lint-staged": {
+    "./src/**/*.{js,ts,tsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "./src/**/*.{css,json}": [
+      "prettier --write"
+    ]
+  }
+}
