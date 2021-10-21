@@ -16,7 +16,7 @@ module.exports = {
       inject: true,
     }),
     new DefinePlugin({
-      "process.env": JSON.stringify(dotenv.config().parsed), // it will automatically pick up key values from .env file
+      "process.env": JSON.stringify(dotenv.config().parsed),
     }),
   ],
   module: {
@@ -41,6 +41,15 @@ module.exports = {
         loader: "file-loader",
         options: {
           outputPath: "assets",
+        },
+      },
+      {
+        test: /\.svg$/,
+        loader: "svg-sprite-loader",
+        options: {
+          extract: false,
+          symbolId: "[name]-[hash:8]",
+          spriteFilename: `[chunkname]/[hash].svg`,
         },
       },
     ],
