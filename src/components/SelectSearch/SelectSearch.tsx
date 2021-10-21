@@ -1,7 +1,9 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useEffect, useRef, useState } from "react";
+import useOnClickOutside from "src/hooks/useOnClickOutside";
 import {
   Container,
   Dropdown,
+  Input,
   Option,
   ResultsContainer,
 } from "./SelectSearch.styles";
@@ -11,17 +13,40 @@ interface SelectOption {
 }
 
 interface SelectSearchProps {
-  options: SelectOption[];
+  options?: SelectOption[];
+  defaultValue?: unknown;
+  onChange: (option: any) => void;
 }
 
-const SelectSearch = ({ options }: SelectSearchProps) => {
-  const [results, setResults] = useState<SelectOption[]>(options);
+const SelectSearch = ({
+  options,
+  defaultValue,
+  onChange,
+}: SelectSearchProps) => {
+  const resultsRef = useRef(null);
+  const [inputValue, setInputValue] = useState("");
+  const [results, setResults] = useState<SelectOption[]>([]);
   const [dropdownVisible, setDropdownVisible] = useState(false);
 
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
+  useEffect(() => {
+    if (options?.length && defaultValue) {
+      setResults(options);
+      setInputValue((defaultValue as SelectOption).name);
+    }
+  }, [options, defaultValue]);
 
-    const filteredList = results.filter(option => option.name.includes(value));
+  const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setInputValue(value);
+
+    if (!value && options) {
+      setResults(options);
+      return;
+    }
+
+    const filteredList = results.filter(option =>
+      option.name.toLowerCase().includes(value.toLowerCase()),
+    );
 
     setResults(filteredList);
   };
@@ -34,20 +59,34 @@ const SelectSearch = ({ options }: SelectSearchProps) => {
     setDropdownVisible(false);
   };
 
+  const handleClickOutside = () => {
+    hideDropdown();
+  };
+
+  const onOptionClick = (option: SelectOption) => {
+    setInputValue(option.name);
+    onChange(option);
+    hideDropdown();
+  };
+
+  useOnClickOutside(resultsRef, handleClickOutside);
+
   return (
     <Container>
-      <input
+      <Input
+        value={inputValue}
         type="text"
         placeholder="Type to search ports"
-        onChange={onChange}
+        onChange={onInputChange}
         onFocus={showDropdown}
-        onBlur={hideDropdown}
       />
       {dropdownVisible && (
         <Dropdown>
-          <ResultsContainer>
-            {results.map(({ name }) => (
-              <Option key={name}>{name}</Option>
+          <ResultsContainer ref={resultsRef}>
+            {results.map(option => (
+              <Option key={option.name} onClick={() => onOptionClick(option)}>
+                {option.name}
+              </Option>
             ))}
           </ResultsContainer>
         </Dropdown>
