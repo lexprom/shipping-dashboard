@@ -6,6 +6,7 @@ export const Container = styled.div`
   flex: 1;
   background: #f7f8fc;
   padding: 30px;
+  overflow: auto;
 `;
 
 export const Title = styled.div`
@@ -15,11 +16,5 @@ export const Title = styled.div`
   line-height: 30px;
   letter-spacing: 0.3px;
   color: #252733;
-  margin-bottom: 54px;
-`;
-
-export const MarketRatesTiles = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
 `;

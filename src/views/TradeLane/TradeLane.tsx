@@ -1,36 +1,14 @@
-import React, { useState } from "react";
-import MarketRateTile from "src/components/MarketRateTile/MarketRateTile";
-import { Container, MarketRatesTiles, Title } from "./TradeLane.styles";
-
-enum MarketRates {
-  Low,
-  Average,
-  High,
-}
+import React from "react";
+import Graph from "./Graph";
+import MarketRatesTiles from "./MarketRatesTiles";
+import { Container, Title } from "./TradeLane.styles";
 
 const TradeLane = () => {
-  const [selectedMarketRate, setSelectedMarketRate] = useState(MarketRates.Low);
-
   return (
     <Container>
       <Title>Trade Lanes</Title>
-      <MarketRatesTiles>
-        <MarketRateTile
-          title="Market Low"
-          isSelected={selectedMarketRate === MarketRates.Low}
-          onClick={() => setSelectedMarketRate(MarketRates.Low)}
-        />
-        <MarketRateTile
-          title="Market Average"
-          isSelected={selectedMarketRate === MarketRates.Average}
-          onClick={() => setSelectedMarketRate(MarketRates.Average)}
-        />
-        <MarketRateTile
-          title="Market High"
-          isSelected={selectedMarketRate === MarketRates.High}
-          onClick={() => setSelectedMarketRate(MarketRates.High)}
-        />
-      </MarketRatesTiles>
+      <MarketRatesTiles />
+      <Graph />
     </Container>
   );
 };

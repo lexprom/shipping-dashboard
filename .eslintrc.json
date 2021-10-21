@@ -25,7 +25,16 @@
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": "error",
     "react/no-unescaped-entities": "off",
-    "import/namespace": "off"
+    "import/namespace": "off",
+    "@typescript-eslint/ban-types": [
+      "error",
+      {
+        "extendDefaults": true,
+        "types": {
+          "{}": false
+        }
+      }
+    ]
   },
   "settings": {
     "import/extensions": [".ts", ".tsx"],

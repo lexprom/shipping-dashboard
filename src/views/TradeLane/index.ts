@@ -1,1 +1,3 @@
-export * from "./TradeLane";
+import TradeLane from "./TradeLane";
+
+export default TradeLane;

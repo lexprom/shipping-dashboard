@@ -1,1 +1,3 @@
-export * from "./LeftBar";
+import LeftBar from "./LeftBar";
+
+export default LeftBar;

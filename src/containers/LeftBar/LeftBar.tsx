@@ -1,6 +1,6 @@
 import React from "react";
 import { AppTitle, Container, Options, OverviewOption } from "./LeftBar.styles";
-// import graphIcon from "assets/bar-chart.png";
+import graphIcon from "../../../assets/chart.png";
 
 const LeftBar = () => {
   return (
@@ -8,7 +8,7 @@ const LeftBar = () => {
       <AppTitle>Dashboard</AppTitle>
       <Options>
         <OverviewOption>
-          {/* <img src={graphIcon} /> */}
+          <img src={graphIcon} />
           Trade Lanes
         </OverviewOption>
       </Options>
