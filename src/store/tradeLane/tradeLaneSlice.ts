@@ -1,7 +1,14 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-
 import api from "src/api";
+import MarketRate from "src/models/marketRate";
+import Port from "src/models/port";
 import { RootState } from "..";
+
+export enum MarketRates {
+  Low,
+  Average,
+  High,
+}
 
 export const fetchPorts = createAsyncThunk(
   "ports",
@@ -25,21 +32,45 @@ export const fetchMarketRates = createAsyncThunk(
       queryParams.append("origin", params.origin.toString());
       queryParams.append("destination", params.destination.toString());
 
-      return await api.request("/rates" + queryParams.toString(), { signal });
+      return await api.request("/rates?" + queryParams.toString(), { signal });
     } catch (error) {
       return rejectWithValue(error);
     }
   },
 );
 
-export const tradeLaneSlice = createSlice({
+interface TradeLineSlice {
+  error: string;
+  isLoading: boolean;
+  firstPort: Port | null;
+  secondPort: Port | null;
+  currentMarketRateFilter: MarketRates;
+  ports: Port[];
+  marketRates: MarketRate[];
+}
+
+export const tradeLaneSlice = createSlice<TradeLineSlice, {}>({
   name: "tradeLane",
   initialState: {
+    error: "",
     isLoading: false,
+    firstPort: null,
+    secondPort: null,
+    currentMarketRateFilter: MarketRates.Low,
     ports: [],
     marketRates: [],
   },
-  reducers: {},
+  reducers: {
+    updateFirstPort: (state: TradeLineSlice, action: any) => {
+      state.firstPort = action.payload;
+    },
+    updateSecondPort: (state: TradeLineSlice, action: any) => {
+      state.secondPort = action.payload;
+    },
+    changeMarketRateFilter: (state: TradeLineSlice, action: any) => {
+      state.currentMarketRateFilter = action.payload;
+    },
+  },
   extraReducers: {
     [fetchPorts.pending.toString()]: state => {
       state.isLoading = true;
@@ -47,6 +78,8 @@ export const tradeLaneSlice = createSlice({
     [fetchPorts.fulfilled.toString()]: (state, action) => {
       state.isLoading = false;
       state.ports = action.payload.data;
+      state.firstPort = action.payload.data[0];
+      state.secondPort = action.payload.data[1];
     },
     [fetchMarketRates.pending.toString()]: state => {
       state.isLoading = true;
@@ -54,6 +87,14 @@ export const tradeLaneSlice = createSlice({
     [fetchMarketRates.fulfilled.toString()]: (state, action) => {
       state.isLoading = false;
       state.marketRates = action.payload.data;
+      state.error = "";
+    },
+    [fetchMarketRates.rejected.toString()]: (state, action) => {
+      if (action.payload.response.status == 404) {
+        state.error = "No data were found. Change your ports";
+      } else {
+        state.error = "An error ocurred";
+      }
     },
   },
 });
@@ -61,5 +102,14 @@ export const tradeLaneSlice = createSlice({
 export const selectPorts = (state: RootState) => state.tradeLane.ports;
 export const selectMarketRates = (state: RootState) =>
   state.tradeLane.marketRates;
+export const selectFirstPort = (state: RootState) => state.tradeLane.firstPort;
+export const selectSecondPort = (state: RootState) =>
+  state.tradeLane.secondPort;
+export const selectErrorMessage = (state: RootState) => state.tradeLane.error;
+export const selectCurrentMarketRateFilter = (state: RootState) =>
+  state.tradeLane.currentMarketRateFilter;
+
+export const { updateFirstPort, updateSecondPort, changeMarketRateFilter } =
+  tradeLaneSlice.actions as any;
 
 export default tradeLaneSlice.reducer;
