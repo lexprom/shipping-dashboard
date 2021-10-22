@@ -102,6 +102,7 @@ export const tradeLaneSlice = createSlice<TradeLineSlice, {}>({
       }
     },
     [fetchMarketRates.rejected.toString()]: (state, action) => {
+      state.isLoading = false;
       if (action.payload.response.status == 404) {
         state.error = "No data were found. Change your ports";
       } else {
@@ -120,6 +121,7 @@ export const selectSecondPort = (state: RootState) =>
 export const selectErrorMessage = (state: RootState) => state.tradeLane.error;
 export const selectCurrentMarketRateFilter = (state: RootState) =>
   state.tradeLane.currentMarketRateFilter;
+export const selectIsLoading = (state: RootState) => state.tradeLane.isLoading;
 
 export const { updateFirstPort, updateSecondPort, changeMarketRateFilter } =
   tradeLaneSlice.actions as any;
