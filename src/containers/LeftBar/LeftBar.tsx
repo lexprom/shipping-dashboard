@@ -1,6 +1,12 @@
 import React from "react";
-import { AppTitle, Container, Options, OverviewOption } from "./LeftBar.styles";
-import graphIcon from "../../../assets/chart.png";
+import {
+  AppTitle,
+  Container,
+  Options,
+  OveriviewLogo,
+  OverviewOption,
+} from "./LeftBar.styles";
+import chartIcon from "../../../assets/chart.svg";
 
 const LeftBar = () => {
   return (
@@ -8,7 +14,7 @@ const LeftBar = () => {
       <AppTitle>Dashboard</AppTitle>
       <Options>
         <OverviewOption>
-          <img src={graphIcon} />
+          <OveriviewLogo src={chartIcon} />
           Trade Lanes
         </OverviewOption>
       </Options>

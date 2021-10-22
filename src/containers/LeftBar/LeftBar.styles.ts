@@ -24,10 +24,10 @@ export const Options = styled.div``;
 export const OverviewOption = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
   height: 56px;
   background: rgba(159, 162, 180, 0.08);
   border-left: 3px solid #dde2ff;
+  cursor: pointer;
 
   font-style: normal;
   font-weight: normal;
@@ -35,4 +35,11 @@ export const OverviewOption = styled.div`
   line-height: 20px;
   letter-spacing: 0.2px;
   color: #dde2ff;
+`;
+
+export const OveriviewLogo = styled.img`
+  width: 16px;
+  height: 16px;
+  margin-right: 20px;
+  margin-left: 25px;
 `;
