@@ -3,8 +3,8 @@ import {
   AppTitle,
   Container,
   Options,
-  OveriviewLogo,
-  OverviewOption,
+  TradeLaneLogo,
+  TradeLaneOption,
 } from "./LeftBar.styles";
 import chartIcon from "../../../assets/chart.svg";
 
@@ -13,10 +13,10 @@ const LeftBar = () => {
     <Container>
       <AppTitle>Dashboard</AppTitle>
       <Options>
-        <OverviewOption>
-          <OveriviewLogo src={chartIcon} />
+        <TradeLaneOption>
+          <TradeLaneLogo src={chartIcon} />
           Trade Lanes
-        </OverviewOption>
+        </TradeLaneOption>
       </Options>
     </Container>
   );

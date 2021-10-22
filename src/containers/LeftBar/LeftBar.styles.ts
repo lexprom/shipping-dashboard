@@ -21,7 +21,7 @@ export const AppTitle = styled.div`
 
 export const Options = styled.div``;
 
-export const OverviewOption = styled.div`
+export const TradeLaneOption = styled.div`
   display: flex;
   align-items: center;
   height: 56px;
@@ -37,9 +37,9 @@ export const OverviewOption = styled.div`
   color: #dde2ff;
 `;
 
-export const OveriviewLogo = styled.img`
+export const TradeLaneLogo = styled.img`
   width: 16px;
   height: 16px;
   margin-right: 20px;
-  margin-left: 25px;
+  margin-left: 40px;
 `;
