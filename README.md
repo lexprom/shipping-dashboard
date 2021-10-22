@@ -1,4 +1,4 @@
-# shipping-dashboard
+# Shipping Dashboard
 
 ## Requirements
 * Node.js | Expected version "^12.22.0 || ^14.17.0 || >=16.0.0"
