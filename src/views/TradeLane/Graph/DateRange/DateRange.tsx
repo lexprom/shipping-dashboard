@@ -2,8 +2,8 @@ import React from "react";
 import { Container, DateText, Line } from "./DateRange.styles";
 
 interface DateRangeProps {
-  startDate?: string | number;
-  endDate?: string | number;
+  startDate?: string | number | null;
+  endDate?: string | number | null;
 }
 
 const DateRange = ({ startDate, endDate }: DateRangeProps) => {

@@ -1,8 +1,8 @@
 type MarketRate = {
-  day: string;
-  mean: number;
-  low: number;
-  high: number;
+  day: string | null;
+  mean: number | null;
+  low: number | null;
+  high: number | null;
 };
 
 export default MarketRate;
