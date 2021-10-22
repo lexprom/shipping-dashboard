@@ -37,19 +37,10 @@ module.exports = {
         use: ["style-loader", "css-loader"],
       },
       {
-        test: /\.(png|jpg)$/,
+        test: /\.(png|jpg|svg)$/,
         loader: "file-loader",
         options: {
           outputPath: "assets",
-        },
-      },
-      {
-        test: /\.svg$/,
-        loader: "svg-sprite-loader",
-        options: {
-          extract: false,
-          symbolId: "[name]-[hash:8]",
-          spriteFilename: `[chunkname]/[hash].svg`,
         },
       },
     ],
