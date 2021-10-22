@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import SelectSearch from "src/components/SelectSearch/SelectSearch";
 import { useAppDispatch } from "src/store";
 import {
-  fetchMarketRates,
   selectErrorMessage,
   selectFirstPort,
   selectMarketRates,
@@ -29,17 +28,6 @@ const Graph = () => {
   const firstPort = useSelector(selectFirstPort);
   const secondPort = useSelector(selectSecondPort);
   const errorMessage = useSelector(selectErrorMessage);
-
-  useEffect(() => {
-    if (firstPort && secondPort) {
-      dispatch(
-        fetchMarketRates({
-          origin: firstPort.code,
-          destination: secondPort.code,
-        }),
-      );
-    }
-  }, [firstPort, secondPort]);
 
   return (
     <Container>
