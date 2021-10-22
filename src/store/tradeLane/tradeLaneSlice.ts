@@ -88,6 +88,18 @@ export const tradeLaneSlice = createSlice<TradeLineSlice, {}>({
       state.isLoading = false;
       state.marketRates = action.payload.data;
       state.error = "";
+
+      if (
+        action.payload.data.every(
+          (value: MarketRate) =>
+            value.day === null ||
+            value.high === null ||
+            value.low === null ||
+            value.mean === null,
+        )
+      ) {
+        state.error = "Data are incomplete";
+      }
     },
     [fetchMarketRates.rejected.toString()]: (state, action) => {
       if (action.payload.response.status == 404) {
