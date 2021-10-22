@@ -23,7 +23,13 @@
     "react/prop-types": "off",
     "react/display-name": "off",
     "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_"
+      }
+    ],
     "react/no-unescaped-entities": "off",
     "import/namespace": "off",
     "@typescript-eslint/ban-types": [
@@ -34,7 +40,8 @@
           "{}": false
         }
       }
-    ]
+    ],
+    "@typescript-eslint/ban-ts-comment": "off"
   },
   "settings": {
     "import/extensions": [".ts", ".tsx"],
